@@ -50,4 +50,6 @@ npm run build    # typecheck e build de produção
 - Toda alternativa precisa de `explanation`.
 - Múltipla escolha: mais de um id em `correct`. Não escreva "Choose 2" no enunciado; a UI mostra isso.
 - Não baseie resposta correta em fatos marcados como UNVERIFIED em `docs/research.md`.
-- `npm run test` valida o banco.
+- Perguntas e alternativas ficam sempre em inglês. Nunca traduza nem altere esse texto.
+- Explicações têm versão em português em `src/data/questions/pt/<seção>.ts`. Ao criar ou mudar uma questão, atualize a tradução de todas as alternativas.
+- `npm run test` valida o banco e as traduções.

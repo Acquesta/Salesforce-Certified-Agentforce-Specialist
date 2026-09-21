@@ -79,3 +79,8 @@ export interface AttemptSummary {
   passed: boolean
   bySection: SectionScore[]
 }
+
+/** Portuguese explanations: question id -> option id -> text. Questions and options stay in English. */
+export type ExplanationTranslations = Record<string, Record<string, string>>
+
+export type ExplanationLang = 'en' | 'pt'
