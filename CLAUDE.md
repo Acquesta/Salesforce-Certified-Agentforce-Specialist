@@ -15,12 +15,15 @@ Passos para cada atualização:
 3. Implemente a melhoria na branch de trabalho. Rode `npm run test` e `npm run build` antes de cada commit.
 4. Faça merge da branch de trabalho na `dev` e envie a `dev` para o GitHub.
 5. Teste na `dev`: rode `npm run test` e `npm run build`, e teste o app no browser com `npm run dev`.
-6. Só depois de a `dev` estar testada, faça merge da `dev` na `main` e envie a `main`.
+6. Só depois de a `dev` estar testada, abra um Pull Request no GitHub de `dev` para `main`. O merge na `main` acontece pelo PR.
 
 Regras:
 - Nunca commite direto na `main`.
+- Nunca faça merge local na `main` nem `git push` para a `main`. Use sempre um PR de `dev` para `main`.
 - Nunca crie branch de trabalho a partir da `main`.
-- Peça confirmação ao usuário antes de levar a `dev` para a `main`.
+- Peça confirmação ao usuário antes de abrir o PR para a `main`.
+- No corpo do PR, liste as mudanças e o resultado dos testes (`npm run test`, `npm run build`, teste no browser).
+- Para abrir o PR, use `gh pr create --base main --head dev` se o GitHub CLI estiver instalado. Se não estiver, envie o link `https://github.com/Acquesta/Salesforce-Certified-Agentforce-Specialist/compare/main...dev` ao usuário.
 
 Remote: `origin` = https://github.com/Acquesta/Salesforce-Certified-Agentforce-Specialist.git
 
@@ -47,4 +50,6 @@ npm run build    # typecheck e build de produção
 - Toda alternativa precisa de `explanation`.
 - Múltipla escolha: mais de um id em `correct`. Não escreva "Choose 2" no enunciado; a UI mostra isso.
 - Não baseie resposta correta em fatos marcados como UNVERIFIED em `docs/research.md`.
-- `npm run test` valida o banco.
+- Perguntas e alternativas ficam sempre em inglês. Nunca traduza nem altere esse texto.
+- Explicações têm versão em português em `src/data/questions/pt/<seção>.ts`. Ao criar ou mudar uma questão, atualize a tradução de todas as alternativas.
+- `npm run test` valida o banco e as traduções.

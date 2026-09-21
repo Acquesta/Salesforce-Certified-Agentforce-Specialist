@@ -1,4 +1,4 @@
-import type { AttemptSummary, QuizMode, QuizSession, SectionId } from '../types/quiz'
+import type { AttemptSummary, ExplanationLang, QuizMode, QuizSession, SectionId } from '../types/quiz'
 
 const SESSION_KEY = 'afs-quiz:session:v1'
 const HISTORY_KEY = 'afs-quiz:history:v1'
@@ -56,4 +56,14 @@ export function loadPrefs(): StartPrefs | null {
 
 export function savePrefs(prefs: StartPrefs): void {
   write(PREFS_KEY, prefs)
+}
+
+const LANG_KEY = 'afs-quiz:explanation-lang:v1'
+
+export function loadExplanationLang(): ExplanationLang {
+  return read<ExplanationLang>(LANG_KEY) === 'pt' ? 'pt' : 'en'
+}
+
+export function saveExplanationLang(lang: ExplanationLang): void {
+  write(LANG_KEY, lang)
 }
