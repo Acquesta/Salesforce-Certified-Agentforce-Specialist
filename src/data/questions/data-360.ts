@@ -136,7 +136,7 @@ export const data360Questions: Question[] = [
       {
         id: 'b',
         text: 'Chatter feed posts from selected groups',
-        explanation: 'Chatter feeds are not a data library source. A library is built from Knowledge, uploaded files, web search, or a custom retriever.',
+        explanation: 'Chatter feeds are not a data library source. A library is built from Knowledge articles or uploaded files; other content reaches the agent through a custom retriever or an action.',
       },
       {
         id: 'c',
