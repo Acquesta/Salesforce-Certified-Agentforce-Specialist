@@ -891,4 +891,82 @@ export const promptEngineeringQuestions: Question[] = [
     correct: ['a', 'c'],
     reference: REF_TRUST_HELP,
   },
+  {
+    id: 'PE-025',
+    section: 'prompt-engineering',
+    type: 'single',
+    prompt:
+      'Cloud Kicks added an externally hosted model through BYOLLM, and a model configuration in Model Playground now points at it. Compliance has asked for the model to be taken out of the org entirely. What should the Agentforce Specialist do?',
+    options: [
+      {
+        id: 'a',
+        text: 'Open Setup, go to Einstein Generative AI, and clear the checkbox next to the model so the org stops calling it.',
+        explanation:
+          'Setup has no per-model on/off switch for generative models. The org-wide choice is a single option with three values, and it removes nothing from the model library.',
+      },
+      {
+        id: 'b',
+        text: 'Turn on Global Model Opt-Out so that Salesforce stops making that model available to the org.',
+        explanation:
+          'Global Model Opt-Out stops Salesforce from using org data to build global predictive models such as Einstein Scoring. It does not control which LLM an org may call.',
+      },
+      {
+        id: 'c',
+        text: 'Delete the associated model configurations first, then delete the foundation model in AI Models.',
+        explanation:
+          'A foundation model can be deleted only when it is no longer a source for other models, so its configurations go first. This work needs the "Allow users to manage models in AI Models" permission, which Data Cloud Architect includes.',
+      },
+      {
+        id: 'd',
+        text: 'Have an admin with the Prompt Template Manager permission set remove the model from the Model Library.',
+        explanation:
+          'Prompt Template Manager grants access to Prompt Builder for creating and managing prompt templates. It is not the permission that governs the model library in AI Models.',
+      },
+    ],
+    correct: ['c'],
+    reference:
+      'https://help.salesforce.com/s/articleView?language=en_US&id=data.c360_a_ai_foundation_models.htm&type=5',
+  },
+  {
+    id: 'PE-026',
+    section: 'prompt-engineering',
+    type: 'multiple',
+    prompt:
+      'Universal Containers (UC) sets the Agentforce model option for the org to AWS-Hosted. An Agentforce Specialist has to explain to the governance team what that setting actually controls. Which statements are accurate?',
+    options: [
+      {
+        id: 'a',
+        text: 'It stops any prompt template, Apex class, or Models API call from reaching a different model.',
+        explanation:
+          'A custom action that uses a prompt template, Apex, or the Models API can still reference any Salesforce-managed or BYO model. Aligning those actions with the org choice is a recommendation, not something the setting enforces.',
+      },
+      {
+        id: 'b',
+        text: 'It is selected in Setup under Einstein Audit, Analytics, and Monitoring Setup and covers every Agentforce agent.',
+        explanation:
+          '"Select the Model for Agentforce" lives on that Setup page, and the chosen model is what the reasoning engine uses across all agents in the org.',
+      },
+      {
+        id: 'c',
+        text: 'It presents every Salesforce-managed model with its own checkbox so unwanted ones can be cleared.',
+        explanation:
+          'The option offers three values only: Salesforce Default, AWS-Hosted, and Google Gemini. There is no per-model checkbox list.',
+      },
+      {
+        id: 'd',
+        text: 'A model_config block written on an agent or a subagent takes precedence over it.',
+        explanation:
+          'Agent Script accepts a model_config block at agent and subagent level, and precedence runs subagent, then agent, then the org default.',
+      },
+      {
+        id: 'e',
+        text: 'It removes the model the org used before from the Model Library in AI Models.',
+        explanation:
+          'Changing the option leaves the model library untouched. Models are removed in AI Models by deleting their configurations and then the foundation model.',
+      },
+    ],
+    correct: ['b', 'd'],
+    reference:
+      'https://help.salesforce.com/s/articleView?language=en_US&id=ai.agent_setup_select_model_provider.htm&type=5',
+  },
 ]

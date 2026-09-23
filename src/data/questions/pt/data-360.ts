@@ -21,7 +21,7 @@ export const data360Pt: ExplanationTranslations = {
   },
   'DC-004': {
     a: 'Knowledge é um tipo de library suportado. Você escolhe campos de identificação e campos de conteúdo que o agente usa para encontrar os artigos e responder com base neles.',
-    b: 'Feeds do Chatter não são uma fonte de data library. Um library é criado a partir de Knowledge, arquivos enviados (upload), web search ou um custom retriever.',
+    b: 'Feeds do Chatter não são uma fonte de data library. Um library é criado a partir de artigos do Knowledge ou de arquivos enviados (upload); outros conteúdos chegam ao agente por um custom retriever ou por uma action.',
     c: 'Arquivos enviados (upload) são um tipo de library suportado, dentro de limites de tamanho, como até 100 MB para PDFs e até 4 MB para arquivos de texto ou HTML.',
     d: 'Relatórios e dashboards não são fontes de library. Os agentes acessam dados estruturados do CRM por meio de actions, como flows, e não por um data library.',
     e: 'Mensagens de Email-to-Case não são uma fonte de library selecionável. Elas precisariam de uma configuração separada de ingestão e indexação no Data 360.',

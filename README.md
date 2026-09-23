@@ -36,7 +36,7 @@ npm run build      # typecheck and production build
 
 ## Adding questions
 
-Questions live in `src/data/questions/<section>.ts` and follow the `Question` type in `src/types/quiz.ts`. Every option needs an `explanation`. Multiple-select questions list more than one id in `correct`; the UI shows "Choose N answers", so do not repeat it in the prompt. Portuguese explanations live in `src/data/questions/pt/<section>.ts` (question id → option id → text); every option needs one. `npm run test` validates the bank and the translations.
+Questions live in `src/data/questions/<section>.ts` and follow the `Question` type in `src/types/quiz.ts`. Every option needs an `explanation`. Multiple-select questions list more than one id in `correct`; the UI shows "Choose N answers", so do not repeat it in the prompt. Portuguese explanations live in `src/data/questions/pt/<section>.ts` (question id → option id → text); every option needs one. `npm run test` validates the bank and the translations. Research notes for the question writers are in `docs/research.md` and `docs/research-gaps.md`.
 
 ## Disclaimer
 

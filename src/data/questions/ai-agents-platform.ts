@@ -781,4 +781,154 @@ export const aiAgentsPlatformQuestions: Question[] = [
     correct: ['b', 'e'],
     reference: CUSTOM_ACTION_HELP,
   },
+  {
+    id: 'AA-122',
+    section: 'ai-agents',
+    type: 'multiple',
+    prompt:
+      'Universal Containers (UC) has an activated Agentforce Service agent and wants it to answer customer emails. The Agentforce Specialist is working through the prerequisites before creating the email configuration. Which steps are required?',
+    options: [
+      {
+        id: 'a',
+        text: 'Turn on Email-to-Case and add at least one verified routing address.',
+        explanation:
+          'Email-to-Case has to be configured with a verified routing address, because the email configuration is later linked to that address. Flex Credits and Lightning threading belong to the same prerequisite list.',
+      },
+      {
+        id: 'b',
+        text: 'Select a Classic email template so the reply keeps the case thread intact.',
+        explanation:
+          'Agentforce for Service on Email supports Lightning email templates only. A Classic template cannot be picked in the email configuration.',
+      },
+      {
+        id: 'c',
+        text: 'Remove the user verification subagent from the agent before it goes on email.',
+        explanation:
+          'Agentforce Service Agent on Email does not support end-user verification, so an agent that carries a verification subagent has to have it removed first.',
+      },
+      {
+        id: 'd',
+        text: 'Create an Omni-Channel routing configuration that uses the Agentforce Service Agent routing type.',
+        explanation:
+          'That routing type is how a Service agent is connected to enhanced messaging. Email runs through an email configuration attached to an Email-to-Case routing address instead.',
+      },
+      {
+        id: 'e',
+        text: 'Set up a Sales Engagement cadence so the agent has a way to send its replies.',
+        explanation:
+          'Cadences drive the proactive outbound email of Agentforce Engagement, formerly SDR. They play no part in answering inbound case email.',
+      },
+    ],
+    correct: ['a', 'c'],
+    reference:
+      'https://help.salesforce.com/s/articleView?language=en_US&id=ai.agent_email_parent.htm&type=5',
+  },
+  {
+    id: 'AA-123',
+    section: 'ai-agents',
+    type: 'single',
+    prompt:
+      'Cloud Kicks is reviewing how its Agentforce Service agent behaves on the email channel before go-live. Customers often attach screenshots to their emails, and service managers assume the agent will close the case once the thread ends. Which statement is accurate?',
+    options: [
+      {
+        id: 'a',
+        text: 'It reads the subject, the body, and any attachments, and closes the case once it sends its final reply.',
+        explanation:
+          'The agent works from the subject and body only, and images and attachments are ignored. It also never closes a case.',
+      },
+      {
+        id: 'b',
+        text: 'It reads only the subject and body, and it never closes cases, so a scheduled Flow is the recommended cleanup.',
+        explanation:
+          'Attachments and images are ignored, and the agent does not close cases, which is why Salesforce recommends a scheduled Flow for old ones. It also does not process new inbound email on a closed case.',
+      },
+      {
+        id: 'c',
+        text: 'It can be instructed to stay silent when it has no answer, and the Error system message then closes the case.',
+        explanation:
+          'Instructions telling the agent to take no action are not supported; it always responds unless a human escalation is requested or a runtime error occurs. Welcome and Error system messages are not used on email.',
+      },
+      {
+        id: 'd',
+        text: 'When a customer asks for a person, the agent transfers the case through Omni-Channel and closes it after the handoff.',
+        explanation:
+          'On email a customer can request escalation to a service rep, and a human takes over by reassigning the case from the AI agent. No case is closed by the agent at that point.',
+      },
+    ],
+    correct: ['b'],
+    reference:
+      'https://help.salesforce.com/s/articleView?language=en_US&id=ai.service_agent_considerations_1.htm&type=5',
+  },
+  {
+    id: 'AA-124',
+    section: 'ai-agents',
+    type: 'single',
+    prompt:
+      'An Agentforce Specialist at Universal Containers (UC) needs to see which standard subagents the org actually has and what each one is scoped to handle. Where should the specialist look?',
+    options: [
+      {
+        id: 'a',
+        text: 'The Agentforce Standard Asset Reference in Salesforce Help, which enumerates every standard subagent.',
+        explanation:
+          'That reference page now covers standard agent connections and adaptive response formats. It no longer lists the standard subagents.',
+      },
+      {
+        id: 'b',
+        text: 'Setup, under Agentforce Assets, on the Subagents tab, where each entry opens its own configuration.',
+        explanation:
+          'Agentforce Assets has Subagents and Actions tabs, and opening a subagent shows its Classification Description, Scope, Instructions, and its actions. Which subagents appear depends on the licenses in the org.',
+      },
+      {
+        id: 'c',
+        text: 'The model_config block in Agent Script, which declares the subagents the agent router may use.',
+        explanation:
+          'A model_config block picks the model an agent or subagent reasons with. It says nothing about which standard subagents exist.',
+      },
+      {
+        id: 'd',
+        text: 'The Testing Center, which lists the subagents an agent is expected to route conversations to.',
+        explanation:
+          'Testing Center compares agent runs against expected subagents, actions, and responses. It is not a catalog of what the org has.',
+      },
+    ],
+    correct: ['b'],
+    reference:
+      'https://trailhead.salesforce.com/content/learn/projects/quick-start-create-employee-agents-in-agentforce/enable-agentforce-and-review-default-topics-and-actions',
+  },
+  {
+    id: 'AA-125',
+    section: 'ai-agents',
+    type: 'single',
+    prompt:
+      'Cloud Kicks starts from a standard subagent that already carries the actions its reps need, but its classification description does not match how customers phrase requests. Testing also shows the agent has no way to hand a conversation to a person. What should the Agentforce Specialist do?',
+    options: [
+      {
+        id: 'a',
+        text: 'Leave the standard subagent as shipped, since it cannot be edited, and build a custom one that repeats its actions.',
+        explanation:
+          'Standard subagents can be added, removed, versioned, and customized. Rebuilding one as a custom subagent adds maintenance for no benefit.',
+      },
+      {
+        id: 'b',
+        text: 'Customize the standard subagent, and add the Escalation subagent, without which the agent cannot escalate at all.',
+        explanation:
+          'Name, description, instructions, and actions are all editable on a standard subagent, and the Escalation subagent is what gives an agent the ability to hand off a conversation.',
+      },
+      {
+        id: 'c',
+        text: 'Drop the classification description in favor of reasoning instructions, and add an escalation action to the subagent.',
+        explanation:
+          'The classification description is what routes a request to the subagent, so removing it hurts routing. Escalation comes from the Escalation subagent plus an outbound Omni-Channel flow, not from an action.',
+      },
+      {
+        id: 'd',
+        text: 'Delete the standard subagent and let the agent router escalate, since it retries the transfer until a rep accepts.',
+        explanation:
+          'An agent attempts a transfer only once per session. If it fails, the session carries on through the Escalation subagent with the earlier context intact.',
+      },
+    ],
+    correct: ['b'],
+    reference:
+      'https://help.salesforce.com/s/articleView?language=en_US&id=ai.service_agent_escalation.htm&type=5',
+  },
 ]
