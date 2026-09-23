@@ -150,4 +150,17 @@ export const promptEngineeringPt: ExplanationTranslations = {
     d: 'O demasking restaura os valores originais na resposta depois que o LLM a devolve.',
     e: 'O feedback é coletado dos usuários depois que eles veem a resposta gerada.',
   },
+  'PE-025': {
+    a: 'O Setup não tem um botão de liga/desliga por modelo para modelos generativos. A escolha em nível de org é uma opção única com três valores, e ela não retira nada da model library.',
+    b: 'O Global Model Opt-Out impede que a Salesforce use os dados da org para construir modelos preditivos globais, como o Einstein Scoring. Ele não controla qual LLM a org pode chamar.',
+    c: 'Um foundation model só pode ser excluído quando não é mais fonte de outros modelos, então as model configurations saem primeiro. Esse trabalho exige a permissão "Allow users to manage models in AI Models", que o Data Cloud Architect já inclui.',
+    d: 'O Prompt Template Manager dá acesso ao Prompt Builder para criar e gerenciar prompt templates. Não é a permissão que controla a model library no AI Models.',
+  },
+  'PE-026': {
+    a: 'Uma custom action que usa prompt template, Apex ou a Models API ainda pode referenciar qualquer modelo gerenciado pela Salesforce ou BYO. Alinhar essas actions à escolha da org é uma recomendação, não algo imposto pela configuração.',
+    b: 'O "Select the Model for Agentforce" fica nessa página do Setup, e o modelo escolhido é o que o reasoning engine usa em todos os agentes da org.',
+    c: 'A opção oferece apenas três valores: Salesforce Default, AWS-Hosted e Google Gemini. Não existe uma lista com checkbox por modelo.',
+    d: 'O Agent Script aceita um bloco model_config tanto no agente quanto no subagent, e a precedência é subagent, depois agent e por último o padrão da org.',
+    e: 'Mudar a opção não mexe na model library. Modelos são removidos no AI Models excluindo as model configurations e, depois, o foundation model.',
+  },
 }

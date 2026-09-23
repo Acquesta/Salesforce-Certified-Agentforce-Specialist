@@ -1,5 +1,7 @@
 # Salesforce Certified Agentforce Specialist — Research Knowledge Base
 
+> Companion file: `research-gaps.md` covers model access management, the email channel and standard subagents, and corrects a few notes below.
+
 Date checked: **2026-09-17**. Prepared as the source of truth for writing ~120 ORIGINAL exam-style practice questions.
 
 Reliability legend used below:
@@ -175,8 +177,8 @@ Writing guidance: prefer "subagent (formerly topic)" on first use, or simply "to
   - Define inputs/outputs up front; action instructions/descriptions drive selection.
 - **Action configuration options (legacy)**: action instructions; per-input "Require input" and "Collect data from user"; per-output "Filter from agent action" (hide from LLM) and "Show in conversation" (display to user). [OFFICIAL Help "Create a custom agent action"; exact labels partly UNVERIFIED]
 - **Standard actions** (examples) [OFFICIAL "Explore Standard Agent Topics and Actions"]: Answer Questions with Knowledge; Query Records; Identify Record by Name; Get Record Details; Summarize Record; Draft or Revise Email/Sales Email; Select User; Identify Object by Name; Update Record; Create/Close Case; Escalate (Escalation topic action). Exact list varies by release — use well-known ones.
-- **Answer Questions with Knowledge**: uses a standard prompt template; grounds on a **Data Library** (Knowledge or files); supported knowledge field types Text, Text Area, Text Area (Long), Text Area (Rich) (not Encrypted Text or URL); file types text, HTML, PDF; **only one topic per agent can use this action** (per Help); requires agent user access to Knowledge, "Allow View Knowledge", fields, and the Data 360 data space. [OFFICIAL Help snippet]
-- **Standard topics/subagents** (examples): General FAQ, General CRM, Escalation, Off Topic, Ambiguous Question, Single Record Summary, Customer Verification (service templates), Case Management, Order Inquiries (templates). [OFFICIAL/3P] Web-search-based data library requires removing General FAQ topic (Summer '25 note) [OFFICIAL maintenance module].
+- **Answer Questions with Knowledge**: uses a standard prompt template; grounds on a **Data Library** (Knowledge or files); supported knowledge field types Text, Text Area, Text Area (Long), Text Area (Rich) (not Encrypted Text or URL); file types text, HTML, PDF; **only one topic per agent can use this action** (2025 Help wording; the current Help page no longer states this limit — see `research-gaps.md` §3.4, treat as UNVERIFIED); requires agent user access to Knowledge, "Allow View Knowledge", fields, and the Data 360 data space. [OFFICIAL Help snippet]
+- **Standard topics/subagents** (examples): General FAQ, General CRM, Escalation, Off Topic, Ambiguous Question, Single Record Summary, Customer Verification (service templates), Case Management, Order Inquiries (templates). [OFFICIAL/3P] Web-search-based data libraries are deprecated; the Search the Web action replaces them, so the old "remove the General FAQ topic" note no longer applies (see `research-gaps.md` §3.4). The current standard subagent list lives in Setup → Agentforce Assets and depends on the org licenses.
 
 ### 4.5 Agent types: Employee vs Service (and sales agents)
 - **Agentforce Employee Agent** (formerly Agentforce (Default) / Einstein Copilot): internal users; runs in Lightning Experience (Agentforce panel), Salesforce mobile app, and Slack. Runs **as the logged-in user** — respects that user's profile, permission sets, FLS and sharing. [OFFICIAL Trailhead]

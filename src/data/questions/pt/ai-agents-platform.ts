@@ -132,4 +132,29 @@ export const aiAgentsPlatformPt: ExplanationTranslations = {
     d: 'O Scope e as instructions orientam o LLM, mas não garantem nada. As configurações de entrada impõem esse comportamento de forma mais confiável.',
     e: 'O Collect data from user diz ao agente para pedir o valor ao cliente, em vez de preenchê-lo a partir do contexto.',
   },
+  'AA-122': {
+    a: 'O Email-to-Case precisa estar configurado com um verified routing address, porque a email configuration é vinculada a esse endereço depois. Flex Credits e Lightning threading fazem parte da mesma lista de pré-requisitos.',
+    b: 'O Agentforce for Service on Email suporta apenas Lightning email templates. Um template Classic não pode ser selecionado na email configuration.',
+    c: 'O Agentforce Service Agent on Email não suporta verificação do usuário final, então um agente que tenha um subagent de verificação precisa que ele seja removido antes.',
+    d: 'Esse routing type é o caminho para conectar um Service agent ao enhanced messaging. O e-mail passa por uma email configuration ligada a um routing address do Email-to-Case.',
+    e: 'As cadences movimentam o e-mail proativo de saída do Agentforce Engagement, antigo SDR. Elas não participam da resposta a e-mails recebidos em casos.',
+  },
+  'AA-123': {
+    a: 'O agente trabalha apenas com o assunto e o corpo, e imagens e anexos são ignorados. Ele também nunca fecha um caso.',
+    b: 'Anexos e imagens são ignorados, e o agente não fecha casos, por isso a Salesforce recomenda um scheduled Flow para os casos antigos. Ele também não processa novos e-mails recebidos em um caso já fechado.',
+    c: 'Instruções mandando o agente não responder não são suportadas; ele sempre responde, exceto quando o cliente pede escalonamento para uma pessoa ou ocorre um erro em tempo de execução. As mensagens de sistema Welcome e Error não são usadas no e-mail.',
+    d: 'No canal de e-mail o cliente pode pedir escalonamento para um atendente, e a pessoa assume reatribuindo o caso do agente de IA para si. Nenhum caso é fechado pelo agente nesse momento.',
+  },
+  'AA-124': {
+    a: 'Essa página de referência hoje cobre standard agent connections e standard adaptive response formats. Ela não lista mais os standard subagents.',
+    b: 'O Agentforce Assets tem as abas Subagents e Actions, e abrir um subagent mostra a Classification Description, o Scope, as Instructions e as actions dele. Quais subagents aparecem depende das licenças da org.',
+    c: 'Um bloco model_config escolhe o modelo com que um agente ou subagent raciocina. Ele não diz nada sobre quais standard subagents existem.',
+    d: 'O Testing Center compara execuções do agente com os subagents, actions e respostas esperados. Ele não é um catálogo do que existe na org.',
+  },
+  'AA-125': {
+    a: 'Standard subagents podem ser adicionados, removidos, versionados e customizados. Refazer um deles como subagent customizado só aumenta a manutenção, sem ganho nenhum.',
+    b: 'Nome, descrição, instructions e actions são todos editáveis em um standard subagent, e o subagent Escalation é o que dá ao agente a capacidade de transferir a conversa.',
+    c: 'A classification description é o que roteia um pedido para o subagent, então tirá-la prejudica o roteamento. O escalonamento vem do subagent Escalation somado a um outbound Omni-Channel flow, e não de uma action.',
+    d: 'O agente tenta a transferência apenas uma vez por sessão. Se ela falhar, a sessão continua pelo subagent Escalation, mantendo o contexto anterior.',
+  },
 }
