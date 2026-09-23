@@ -9,9 +9,10 @@ interface Props {
   session: QuizSession
   summary: AttemptSummary
   onRestart: () => void
+  restartLabel?: string
 }
 
-export function ResultsScreen({ session, summary, onRestart }: Props) {
+export function ResultsScreen({ session, summary, onRestart, restartLabel = 'Start a new quiz' }: Props) {
   const [wrongOnly, setWrongOnly] = useState(false)
   const unanswered = session.questions.filter((q) => !(session.answers[q.question.id]?.length)).length
   const weak = summary.bySection.filter((s) => (s.correct / s.total) * 100 < PASSING_PERCENT)
@@ -158,7 +159,7 @@ export function ResultsScreen({ session, summary, onRestart }: Props) {
           onClick={onRestart}
           className="rounded-md bg-sky-600 px-6 py-3 font-semibold text-white hover:bg-sky-700"
         >
-          Start a new quiz
+          {restartLabel}
         </button>
       </div>
     </div>

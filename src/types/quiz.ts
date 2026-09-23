@@ -39,6 +39,8 @@ export interface QuizConfig {
   mode: QuizMode
   questionCount: number
   sections: SectionId[]
+  /** Restricts the quiz to these question ids (used to practice past mistakes). */
+  questionIds?: string[]
 }
 
 /** A question as presented in one attempt: options already shuffled. */
@@ -84,3 +86,20 @@ export interface AttemptSummary {
 export type ExplanationTranslations = Record<string, Record<string, string>>
 
 export type ExplanationLang = 'en' | 'pt'
+
+/** Lifetime result of one question across attempts. */
+export interface QuestionStat {
+  answered: number
+  correct: number
+  wrong: number
+  lastResult: 'correct' | 'wrong'
+  lastAt: number
+}
+
+export type QuestionStats = Record<string, QuestionStat>
+
+/** A finished attempt kept in full so it can be reopened later. */
+export interface StoredAttempt {
+  summary: AttemptSummary
+  session: QuizSession
+}

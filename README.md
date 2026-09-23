@@ -9,7 +9,8 @@ Practice quiz for the **Salesforce Certified Agentforce Specialist** exam. Built
 - Flag questions for review and jump between them with the question navigator.
 - Questions and options are shuffled on every attempt. Options are labeled A–E; press 1–5 to select.
 - Results overview: score, PASS/FAIL at 72%, score by section, study links for weak sections, full answer review.
-- In-progress quiz and the last 10 attempts are kept in `localStorage`.
+- Answer history: every finished attempt is saved with its answers, the last 5 can be reopened, and a lifetime right/wrong record per question feeds a "Practice my mistakes" run.
+- In-progress quiz and the attempt list are kept in `localStorage` and can be erased from the start screen.
 - Explanations can be switched between English and Brazilian Portuguese (EN / PT toggle in the explanation card). Questions and options always stay in English.
 - Dark mode follows the system setting.
 
