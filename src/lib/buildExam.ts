@@ -50,9 +50,11 @@ export function buildQuiz(
   config: QuizConfig,
   random: () => number = Math.random,
 ): SessionQuestion[] {
+  const allowed = config.questionIds ? new Set(config.questionIds) : null
   const bySection = new Map<SectionId, Question[]>()
   for (const q of bank) {
     if (!config.sections.includes(q.section)) continue
+    if (allowed && !allowed.has(q.id)) continue
     bySection.set(q.section, [...(bySection.get(q.section) ?? []), q])
   }
 

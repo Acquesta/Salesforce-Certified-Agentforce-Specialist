@@ -1,22 +1,37 @@
 import { useEffect, useState } from 'react'
 import { EXAM_QUESTION_COUNT, PASSING_PERCENT, SECTIONS } from '../data/sections'
-import { formatDuration } from '../lib/format'
+import type { StatsOverview } from '../lib/stats'
 import { loadPrefs, savePrefs } from '../lib/storage'
-import type { AttemptSummary, Question, QuizConfig, QuizMode, QuizSession, SectionId } from '../types/quiz'
+import type { Question, QuizConfig, QuizMode, QuizSession, SectionId, StoredAttempt } from '../types/quiz'
+import { AnswerHistory } from './AnswerHistory'
 
 interface Props {
   bank: Question[]
-  history: AttemptSummary[]
+  attempts: StoredAttempt[]
+  stats: StatsOverview
   saved: QuizSession | null
   onStart: (config: QuizConfig) => void
   onResume: () => void
+  onPracticeMistakes: () => void
+  onReview: (attempt: StoredAttempt) => void
+  onClearHistory: () => void
 }
 
 const PRACTICE_COUNTS = [10, 20, 30, 60]
 
 const ALL_SECTION_IDS = SECTIONS.map((s) => s.id)
 
-export function StartScreen({ bank, history, saved, onStart, onResume }: Props) {
+export function StartScreen({
+  bank,
+  attempts,
+  stats,
+  saved,
+  onStart,
+  onResume,
+  onPracticeMistakes,
+  onReview,
+  onClearHistory,
+}: Props) {
   const [prefs] = useState(() => loadPrefs())
   const [mode, setMode] = useState<QuizMode>(prefs?.mode === 'exam' ? 'exam' : 'practice')
   const [count, setCount] = useState(PRACTICE_COUNTS.includes(prefs?.count ?? 0) ? prefs!.count : 10)
@@ -189,26 +204,14 @@ export function StartScreen({ bank, history, saved, onStart, onResume }: Props) 
         </ul>
       </section>
 
-      {history.length > 0 && (
-        <section>
-          <h2 className="mb-3 font-semibold text-slate-900 dark:text-slate-100">Recent attempts</h2>
-          <ul className="divide-y divide-slate-200 rounded-lg border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
-            {history.map((a) => (
-              <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
-                  {new Date(a.finishedAt).toLocaleString()} · {a.mode === 'exam' ? 'Exam' : 'Practice'}
-                </span>
-                <span className="text-slate-600 dark:text-slate-400">
-                  {a.correct}/{a.total} · {formatDuration(a.durationSec)}
-                </span>
-                <span className={`font-semibold ${a.passed ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'}`}>
-                  {a.percent}% {a.passed ? 'PASS' : 'FAIL'}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <AnswerHistory
+        overview={stats}
+        bankSize={bank.length}
+        attempts={attempts}
+        onPracticeMistakes={onPracticeMistakes}
+        onReview={onReview}
+        onClear={onClearHistory}
+      />
     </div>
   )
 }
