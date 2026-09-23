@@ -39,7 +39,7 @@ npm run build    # typecheck e build de produção
 
 - `src/data/questions/*.ts`: banco de questões por seção. Siga o tipo `Question` em `src/types/quiz.ts`.
 - `src/data/sections.ts`: seções oficiais, pesos, nota de aprovação (72%), tempo da prova.
-- `src/lib/`: sorteio ponderado, pontuação, `localStorage`.
+- `src/lib/`: sorteio ponderado, pontuação, estatísticas por questão (`stats.ts`), `localStorage` (`storage.ts`).
 - `src/hooks/quizReducer.ts`: estado do quiz.
 - `src/components/`: telas Start, Quiz e Results.
 - `docs/research.md`: pesquisa da prova (guia oficial Spring '26, fatos por seção, referências).

@@ -1,4 +1,13 @@
-import type { AttemptSummary, ExplanationLang, QuizMode, QuizSession, SectionId } from '../types/quiz'
+import type {
+  AttemptSummary,
+  ExplanationLang,
+  QuestionStats,
+  QuizMode,
+  QuizSession,
+  SectionId,
+  StoredAttempt,
+} from '../types/quiz'
+import { applyAttempt } from './stats'
 
 const SESSION_KEY = 'afs-quiz:session:v1'
 const HISTORY_KEY = 'afs-quiz:history:v1'
@@ -40,6 +49,43 @@ export function addToHistory(attempt: AttemptSummary): AttemptSummary[] {
   const history = [attempt, ...loadHistory().filter((a) => a.id !== attempt.id)].slice(0, HISTORY_LIMIT)
   write(HISTORY_KEY, history)
   return history
+}
+
+const ATTEMPTS_KEY = 'afs-quiz:attempts:v1'
+const STATS_KEY = 'afs-quiz:stats:v1'
+// Full attempts carry every question, so only the newest few are kept.
+const ATTEMPT_LIMIT = 5
+
+/** Finished attempts kept in full, newest first, so results can be reopened. */
+export function loadAttempts(): StoredAttempt[] {
+  const attempts = read<StoredAttempt[]>(ATTEMPTS_KEY)
+  return Array.isArray(attempts) ? attempts.filter((a) => a?.summary && a?.session) : []
+}
+
+export function loadStats(): QuestionStats {
+  return read<QuestionStats>(STATS_KEY) ?? {}
+}
+
+export function saveStats(stats: QuestionStats): void {
+  write(STATS_KEY, stats)
+}
+
+/** Records a finished attempt: summary, full answers and the lifetime per-question stats. */
+export function recordAttempt(summary: AttemptSummary, session: QuizSession) {
+  const attempts = [{ summary, session }, ...loadAttempts().filter((a) => a.summary.id !== summary.id)].slice(
+    0,
+    ATTEMPT_LIMIT,
+  )
+  write(ATTEMPTS_KEY, attempts)
+  const stats = applyAttempt(loadStats(), session)
+  saveStats(stats)
+  return { attempts, history: addToHistory(summary), stats }
+}
+
+export function clearAnswerHistory(): void {
+  write(ATTEMPTS_KEY, null)
+  write(STATS_KEY, null)
+  write(HISTORY_KEY, null)
 }
 
 const PREFS_KEY = 'afs-quiz:prefs:v1'
